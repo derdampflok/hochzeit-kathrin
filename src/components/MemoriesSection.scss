@@ -1,0 +1,81 @@
+@use '../styles/variables' as v;
+
+.memories {
+    width: min(860px, calc(100vw - 34px));
+    border: 1px solid v.$line-soft;
+    background: linear-gradient(150deg, v.$surface-start, v.$surface-end);
+    box-shadow: v.$shadow-card;
+    border-radius: v.$radius-panel;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    animation: memories-fade-up 0.9s 0.08s ease both;
+}
+
+.photo-card {
+    margin: 0;
+    display: grid;
+    gap: 10px;
+
+    figcaption {
+        text-align: center;
+        color: v.$text-soft;
+        font-size: 0.96rem;
+    }
+}
+
+.photo-placeholder {
+    min-height: 250px;
+    border-radius: v.$radius-panel;
+    border: 2px dashed rgb(163 117 95 / 0.42);
+    background:
+        linear-gradient(145deg, rgb(255 241 235 / 0.95), rgb(254 231 222 / 0.82)),
+        repeating-linear-gradient(-45deg,
+            rgb(179 127 111 / 0.13),
+            rgb(179 127 111 / 0.13) 9px,
+            transparent 9px,
+            transparent 18px);
+    display: grid;
+    place-items: center;
+    padding: 16px;
+
+    &.alt {
+        background:
+            linear-gradient(145deg, rgb(255 243 233 / 0.95), rgb(250 231 223 / 0.8)),
+            repeating-linear-gradient(45deg,
+                rgb(177 118 136 / 0.14),
+                rgb(177 118 136 / 0.14) 9px,
+                transparent 9px,
+                transparent 18px);
+    }
+
+    span {
+        color: v.$accent-deep;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+    }
+}
+
+@keyframes memories-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: v.$bp-mobile) {
+    .memories {
+        grid-template-columns: 1fr;
+        padding: 14px;
+    }
+
+    .photo-placeholder {
+        min-height: 210px;
+    }
+}

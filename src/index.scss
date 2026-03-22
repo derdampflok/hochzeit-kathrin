@@ -1,0 +1,33 @@
+@use './styles/variables' as v;
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    font-family: v.$font-body;
+    line-height: 1.5;
+    font-weight: 500;
+    font-size: 17px;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    background: v.$bg-fallback;
+    color: v.$text-main;
+}
+
+p {
+    margin: 0;
+}

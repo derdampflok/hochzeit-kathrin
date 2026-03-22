@@ -1,0 +1,53 @@
+@use '../styles/variables' as v;
+
+.atmosphere {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    background:
+        radial-gradient(circle at 12% 15%, rgb(255 235 225 / 0.75), transparent 35%),
+        radial-gradient(circle at 80% 12%, rgb(255 246 230 / 0.85), transparent 42%),
+        radial-gradient(circle at 50% 95%, rgb(243 219 213 / 0.8), transparent 45%),
+        linear-gradient(170deg, #fffefd, #f8edea 56%, #fff9f6);
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0.18;
+        background-image: radial-gradient(rgb(112 74 58 / 0.24) 0.55px, transparent 0.55px);
+        background-size: 4px 4px;
+    }
+}
+
+.petals {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+
+    &::before,
+    &::after {
+        content: '✿ ❀ ✿ ❁ ✿ ❀ ✿';
+        position: absolute;
+        font-size: 24px;
+        color: rgb(186 108 121 / 0.2);
+        letter-spacing: 0.45em;
+    }
+
+    &::before {
+        top: 30px;
+        left: 32px;
+    }
+
+    &::after {
+        right: 18px;
+        bottom: 38px;
+    }
+}
+
+@media (max-width: v.$bp-mobile) {
+    .petals {
+        display: none;
+    }
+}
