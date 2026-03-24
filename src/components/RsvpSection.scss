@@ -1,276 +1,289 @@
-@use '../styles/variables' as v;
+@use '../styles/design-system' as ds;
 
-.rsvp-card {
-    position: relative;
-    width: min(860px, calc(100vw - 34px));
-    border: 1px solid v.$line-soft;
-    background: linear-gradient(150deg, v.$surface-start, v.$surface-end);
-    box-shadow: v.$shadow-card;
-    border-radius: v.$radius-panel v.$radius-panel 30px 30px;
-    padding: 34px;
-    animation: rsvp-fade-up 1s 0.18s ease both;
-}
+// RsvpSection: RSVP form card with botanical minimalist styling
+.rsvp {
+  position: relative;
 
-.rsvp-content {
-    transition: opacity 0.24s ease;
-}
-
-.rsvp-card.is-loading .rsvp-content {
+  &--loading .rsvp__content {
     opacity: 0.4;
     pointer-events: none;
+  }
 }
 
-.rsvp-loading-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    border-radius: inherit;
-    background: rgb(255 250 247 / 0.38);
-    backdrop-filter: blur(1.4px);
+.rsvp__content {
+  @include ds.transition-smooth(opacity);
 }
 
-.rsvp-spinner {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 3px solid rgb(196 103 131 / 0.28);
-    border-top-color: v.$accent;
-    animation: rsvp-spin 0.9s linear infinite;
+// Loading overlay (appears during submission)
+.rsvp__loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: ds.$space-3;
+  border-radius: inherit;
+  background: rgba(ds.$color-bg-tertiary, 0.6);
+  backdrop-filter: blur(1.4px);
 }
 
-h2 {
+// Loading spinner
+.rsvp__spinner {
+  width: 42px;
+  height: 42px;
+  border-radius: ds.$radius-pill;
+  border: 3px solid rgba(ds.$color-accent, 0.25);
+  border-top-color: ds.$color-accent;
+  animation: rsvp-spin 0.9s linear infinite;
+}
+
+// Main title
+.rsvp__title {
+  margin: 0;
+  font-family: ds.$font-display;
+  font-size: clamp(1.5rem, 4.2vw, 1.875rem); // Responsive
+  color: ds.$color-text-primary;
+  letter-spacing: ds.$letter-spacing-tight;
+  font-weight: ds.$weight-regular;
+}
+
+// Subtitle note
+.rsvp__note {
+  margin-top: ds.$space-2;
+  color: ds.$color-text-secondary;
+  font-family: ds.$font-body;
+  font-size: ds.$font-size-base;
+  line-height: ds.$line-height-normal;
+}
+
+// Thank you section
+.rsvp__thank-you {
+  min-height: 260px;
+  display: grid;
+  align-content: center;
+  gap: ds.$space-2;
+}
+
+// Form styling
+.rsvp__form {
+  margin-top: ds.$space-6;
+  display: grid;
+  gap: ds.$space-2;
+
+  // Labels for form fields
+  label {
+    color: ds.$color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: ds.$letter-spacing-wide;
+    font-size: ds.$font-size-xs;
+    font-weight: ds.$weight-semibold;
+    font-family: ds.$font-body;
+  }
+
+  // Text inputs and textareas (shared styling)
+  input:not([type='checkbox']),
+  textarea {
+    border: ds.$input-border;
+    border-radius: ds.$radius-md;
+    background: ds.$color-bg-primary;
+    color: ds.$color-text-primary;
+    padding: ds.$space-3 ds.$space-3;
+    margin-bottom: ds.$space-1;
+    font: inherit;
+    font-family: ds.$font-body;
+    @include ds.transition-smooth;
+
+    &::placeholder {
+      color: ds.$color-text-muted;
+      opacity: 0.6;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: ds.$color-accent;
+      box-shadow: 0 0 0 3px rgba(ds.$color-accent, 0.15);
+      transform: translateY(-1px);
+    }
+  }
+
+  // Button styling (submit button)
+  button {
+    margin-top: ds.$space-2;
+    border: ds.$border-width-thin solid rgba(ds.$color-accent, 0.4);
+    border-radius: ds.$radius-pill;
+    padding: ds.$space-3 ds.$space-5;
+    font-family: ds.$font-display;
+    font-size: ds.$font-size-lg;
+    letter-spacing: ds.$letter-spacing-normal;
+    color: ds.$color-text-on-accent;
+    background: ds.$color-accent;
+    cursor: pointer;
+    @include ds.transition-smooth;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: ds.$shadow-button;
+      filter: brightness(0.95);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: none;
+      filter: brightness(1);
+    }
+
+    &:focus-visible {
+      @include ds.focus-ring;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Toggle row (checkbox + label)
+.rsvp__toggle-row {
+  display: flex;
+  align-items: center;
+  gap: ds.$space-2;
+  margin-bottom: ds.$space-1;
+
+  label {
+    text-transform: none;
+    letter-spacing: ds.$letter-spacing-normal;
+    font-size: ds.$font-size-sm;
+    font-weight: ds.$weight-regular;
+    font-style: italic;
+    color: ds.$color-text-secondary;
+    cursor: pointer;
+  }
+
+  input[type='checkbox'] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
     margin: 0;
-    font-family: v.$font-display;
-    font-size: clamp(2rem, 4.2vw, 2.85rem);
-    color: v.$text-main;
-    letter-spacing: -0.02em;
-    font-weight: 600;
-}
+    padding: 0;
+    cursor: pointer;
+    border: ds.$border-width-thin solid ds.$color-border-secondary;
+    border-radius: ds.$radius-sm;
+    background: ds.$color-bg-primary;
+    @include ds.transition-smooth;
 
-.card-note {
-    margin-top: 10px;
-    color: v.$text-soft;
-}
-
-.rsvp-thank-you {
-    min-height: 260px;
-    display: grid;
-    align-content: center;
-    gap: 8px;
-}
-
-.rsvp-form {
-    margin-top: 24px;
-    display: grid;
-    gap: 9px;
-
-    label {
-        color: v.$text-muted;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        font-size: 0.78rem;
-        font-weight: 600;
+    &:checked {
+      background: ds.$color-accent url("data:image/svg+xml,%3Csvg xmlns='http%3A//www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 5l2.5 2.5 4.5-4.5' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 10px no-repeat;
+      border-color: ds.$color-accent;
     }
 
-    .rsvp-toggle-row {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 6px;
-
-        label {
-            text-transform: none;
-            letter-spacing: 0;
-            font-size: 0.88rem;
-            font-weight: 400;
-            font-style: italic;
-            color: v.$text-soft;
-            cursor: pointer;
-        }
-
-        input[type='checkbox'] {
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            flex-shrink: 0;
-            margin: 0;
-            padding: 0;
-            cursor: pointer;
-            border: 1px solid v.$line-input;
-            border-radius: 4px;
-            background: rgb(255 255 255 / 0.82);
-            transition: border-color 0.24s ease, background 0.24s ease;
-
-            &:checked {
-                background: v.$accent url("data:image/svg+xml,%3Csvg xmlns='http%3A//www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 5l2.5 2.5 4.5-4.5' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 10px no-repeat;
-                border-color: v.$accent;
-            }
-
-            &:focus-visible {
-                outline: none;
-                border-color: v.$accent;
-                box-shadow: 0 0 0 3px rgb(196 103 131 / 0.15);
-            }
-        }
+    &:focus-visible {
+      outline: none;
+      @include ds.focus-ring;
     }
-
-    input:not([type='checkbox']),
-    textarea {
-        border: 1px solid v.$line-input;
-        border-radius: v.$radius-field;
-        background: rgb(255 255 255 / 0.82);
-        color: v.$text-main;
-        padding: 12px 14px;
-        margin-bottom: 6px;
-        font: inherit;
-        transition: border-color 0.24s ease, box-shadow 0.24s ease, transform 0.24s ease;
-
-        &::placeholder {
-            color: rgb(134 110 101 / 0.62);
-        }
-
-        &:focus {
-            outline: none;
-            border-color: v.$accent;
-            box-shadow: 0 0 0 3px rgb(196 103 131 / 0.15);
-            transform: translateY(-1px);
-        }
-    }
-
-    button {
-        margin-top: 8px;
-        border: 1px solid rgb(171 95 119 / 0.58);
-        border-radius: v.$radius-pill;
-        padding: 11px 18px;
-        font-family: v.$font-display;
-        font-size: 1.18rem;
-        letter-spacing: 0.04em;
-        color: #fff;
-        background: linear-gradient(180deg, #cc6f8c, #b75f79);
-        cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-
-        &:hover {
-            transform: translateY(-2px);
-            box-shadow: v.$shadow-button;
-            filter: saturate(1.08);
-        }
-
-        &:active:not(:disabled) {
-            transform: translateY(0);
-            box-shadow: none;
-            filter: saturate(1);
-        }
-
-        &:focus-visible {
-            outline: 2px solid v.$accent;
-            outline-offset: 2px;
-        }
-    }
+  }
 }
 
-.footnote {
-    margin: 15px 0 0;
-    font-size: 0.9rem;
-    color: v.$text-muted;
+// Form error message
+.rsvp__form-error {
+  margin: ds.$space-2 0 0;
+  color: ds.$color-error;
+  font-family: ds.$font-body;
+  font-size: ds.$font-size-sm;
+  font-weight: ds.$weight-semibold;
 }
 
-.form-error {
-    margin: 10px 0 0;
-    color: v.$accent-deep;
-    font-size: 0.92rem;
-    font-weight: 600;
+// Submit error alert
+.rsvp__submit-error {
+  display: flex;
+  align-items: flex-start;
+  gap: ds.$space-3;
+  border-radius: ds.$radius-lg;
+  padding: ds.$space-4 ds.$space-4;
+  background: rgba(ds.$color-error, 0.08);
+  border: ds.$border-width-medium solid rgba(ds.$color-error, 0.3);
+  animation: rsvp-shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+
+  .rsvp__submit-error-icon {
+    font-size: ds.$font-size-xl;
+    flex-shrink: 0;
+    line-height: ds.$line-height-normal;
+  }
+
+  strong {
+    display: block;
+    color: ds.$color-error;
+    font-size: ds.$font-size-base;
+    font-weight: ds.$weight-bold;
+    font-family: ds.$font-body;
+  }
+
+  p {
+    margin: ds.$space-1 0 0;
+    color: ds.$color-error;
+    font-family: ds.$font-body;
+    font-size: ds.$font-size-sm;
+    line-height: ds.$line-height-normal;
+  }
 }
 
-.rsvp-submit-error {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    border-radius: 10px;
-    padding: 16px 18px;
-    background: rgb(180 30 30 / 0.08);
-    border: 1.5px solid rgb(180 30 30 / 0.3);
-    animation: rsvp-shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
 
-    .rsvp-submit-error-icon {
-        font-size: 1.5rem;
-        flex-shrink: 0;
-        line-height: 1.3;
-    }
-
-    strong {
-        display: block;
-        color: #8b1a1a;
-        font-size: 1rem;
-        font-weight: 700;
-    }
-
-    p {
-        margin: 5px 0 0;
-        color: #7a2020;
-        font-size: 0.88rem;
-        line-height: 1.45;
-    }
-}
-
+// Shake animation (error state)
 @keyframes rsvp-shake {
 
-    0%,
-    100% {
-        transform: translateX(0);
-    }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
 
-    15% {
-        transform: translateX(-7px);
-    }
+  15% {
+    transform: translateX(-7px);
+  }
 
-    30% {
-        transform: translateX(7px);
-    }
+  30% {
+    transform: translateX(7px);
+  }
 
-    45% {
-        transform: translateX(-5px);
-    }
+  45% {
+    transform: translateX(-5px);
+  }
 
-    60% {
-        transform: translateX(5px);
-    }
+  60% {
+    transform: translateX(5px);
+  }
 
-    75% {
-        transform: translateX(-3px);
-    }
+  75% {
+    transform: translateX(-3px);
+  }
 
-    90% {
-        transform: translateX(3px);
-    }
+  90% {
+    transform: translateX(3px);
+  }
 }
 
+// Spinner rotation (loading state)
 @keyframes rsvp-spin {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-@keyframes rsvp-fade-up {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+@media (max-width: ds.$bp-tablet) {
+  .rsvp__form {
+    gap: ds.$space-1;
 
-@media (max-width: v.$bp-mobile) {
-    .rsvp-card {
-        padding: 24px 18px;
-        border-radius: 10px 10px 24px 24px;
+    label {
+      font-size: ds.$font-size-xs;
     }
+  }
 }

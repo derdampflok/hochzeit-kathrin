@@ -1,0 +1,81 @@
+@use '../styles/design-system' as ds;
+
+.card {
+  // Base card styling using botanical minimalist aesthetic
+  @include ds.card-base;
+  @include ds.transition-smooth;
+
+  // Animations: Fade in + subtle upward translate on load
+  animation: card-fade-up 0.8s var(--animation-delay, 0s) ease-out both;
+
+  // Responsive padding
+  @include ds.padding-responsive(ds.$card-padding-mobile, ds.$card-padding-desktop);
+
+  // Width constraint for readability
+  max-width: 860px;
+  width: 100%;
+
+  // Ensure content doesn't overflow
+  overflow: visible; // Changed to visible to show botanical borders
+
+  // Position context for absolutely positioned botanical borders
+  position: relative;
+
+  // Variant: Hero section (refined rounded top)
+  &--hero {
+    border-radius: ds.$card-radius-top + 4px ds.$card-radius-top + 4px ds.$card-radius-bottom ds.$card-radius-bottom;
+  }
+
+  // Variant: Memories section (grid container, no padding on card)
+  // Padding handled at grid level inside CardContent
+
+  // Variant: RSVP section (form container, default styling)
+
+  // Hover state (subtle lift and shadow enhancement)
+  &:hover {
+    box-shadow: ds.$shadow-hover;
+    transform: translateY(-2px);
+  }
+
+  // Focus state (for accessibility when navigated via keyboard)
+  &:focus-within {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// ============================================================================
+// ANIMATION: Card Fade-In + Upward Translate
+// ============================================================================
+// Creates a refined entrance effect: elements fade in while moving up slightly
+
+@keyframes card-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: ds.$bp-tablet) {
+  .card {
+    // Tighter padding on mobile
+    padding: ds.$card-padding-mobile;
+
+    // Slightly less shadow on mobile
+    box-shadow: ds.$shadow-md;
+
+    &:hover {
+      // Disable hover lift on mobile (it feels awkward on touch)
+      transform: none;
+    }
+  }
+}

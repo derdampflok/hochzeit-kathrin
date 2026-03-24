@@ -1,0 +1,73 @@
+@use '../styles/design-system' as ds;
+
+.card-header {
+  // Base header styling
+
+  &--centered {
+    text-align: center;
+  }
+}
+
+.card-header__title {
+  // Main heading styling (using display font for elegance)
+  font-family: ds.$font-display;
+  font-size: clamp(1.875rem, 5vw, 2.25rem); // Responsive sizing: 30px → 36px
+  font-weight: ds.$weight-regular;
+  letter-spacing: ds.$letter-spacing-wide;
+  color: ds.$color-text-primary;
+  margin: 0 0 ds.$space-2 0;
+  line-height: ds.$line-height-tight;
+
+  // Subtle animation on appearance
+  animation: title-fade-in 0.6s ease-out 0.1s backwards;
+
+  @media (max-width: ds.$bp-tablet) {
+    font-size: 1.875rem;
+  }
+}
+
+.card-header__subtitle {
+  // Secondary text styling
+  font-family: ds.$font-body;
+  font-size: clamp(0.875rem, 2vw, 1.125rem); // Responsive: 14px → 18px
+  font-weight: ds.$weight-regular;
+  letter-spacing: ds.$letter-spacing-normal;
+  color: ds.$color-text-secondary;
+  margin: 0;
+  line-height: ds.$line-height-normal;
+
+  // Subtle animation
+  animation: subtitle-fade-in 0.6s ease-out 0.2s backwards;
+
+  @media (max-width: ds.$bp-tablet) {
+    font-size: 0.875rem;
+  }
+}
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+
+@keyframes title-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtitle-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

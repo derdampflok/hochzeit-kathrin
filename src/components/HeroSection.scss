@@ -1,109 +1,118 @@
-@use '../styles/variables' as v;
+@use '../styles/design-system' as ds;
 
+// HeroSection: Main invitation card with refined botanical styling
 .hero {
-    width: min(860px, calc(100vw - 34px));
-    border: 1px solid v.$line-soft;
-    background: linear-gradient(150deg, v.$surface-start, v.$surface-end);
-    box-shadow: v.$shadow-card;
-    text-align: center;
-    border-radius: 34px 34px v.$radius-panel v.$radius-panel;
-    padding: 48px 26px 36px;
-    animation: hero-fade-up 0.8s ease both;
+  // Card styling is inherited from Card component
+  text-align: center;
+  position: relative;
+
+  // Remove inherited padding to control it here
+  padding: ds.$card-padding-desktop;
+
+  @media (max-width: ds.$bp-tablet) {
+    padding: ds.$card-padding-mobile;
+  }
 }
 
-.kicker {
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.26em;
-    font-size: 0.78rem;
-    color: v.$text-muted;
+// Kicker: "Wir heiraten" label
+.hero__kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: ds.$letter-spacing-widest;
+  font-size: ds.$font-size-sm;
+  color: ds.$color-text-muted;
+  font-family: ds.$font-body;
+  font-weight: ds.$weight-regular;
 }
 
-h1 {
-    margin: 14px 0 0;
-    font-family: v.$font-display;
-    font-size: clamp(2.6rem, 7.3vw, 5rem);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    color: v.$text-main;
-    font-weight: 600;
+// Title: Couple names (Great Vibes display font)
+.hero__title {
+  margin: ds.$space-3 0 0;
+  font-family: ds.$font-display;
+  font-size: clamp(1.875rem, 7.3vw, 2.25rem); // Responsive: 30px → 36px
+  line-height: ds.$line-height-tight;
+  letter-spacing: ds.$letter-spacing-tight;
+  color: ds.$color-text-primary;
+  font-weight: ds.$weight-regular;
+
+  @media (max-width: ds.$bp-tablet) {
+    font-size: 1.875rem;
+  }
 }
 
-.hero-divider {
-    margin: 14px auto 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-
-    .line {
-        width: 76px;
-        height: 1px;
-        background: v.$line-strong;
-    }
-
-    .ornament {
-        color: v.$accent;
-        font-size: 1.25rem;
-    }
+// Divider: Decorative line with ornament
+.hero__divider {
+  margin: ds.$space-3 auto 0;
+  display: inline-flex;
+  align-items: center;
+  gap: ds.$space-3;
 }
 
-.date {
-    margin-top: 14px;
-    color: v.$accent-deep;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+.hero__divider-line {
+  width: 48px;
+  height: 1px;
+  background: ds.$color-border-secondary;
+
+  @media (max-width: ds.$bp-tablet) {
+    width: 32px;
+  }
 }
 
-.intro {
-    margin: 14px auto 0;
-    max-width: 53ch;
-    color: v.$text-soft;
+.hero__divider-ornament {
+  color: ds.$color-accent;
+  font-size: ds.$font-size-xl;
+  line-height: 1;
 }
 
-.swan-seal {
-    width: 104px;
-    height: 104px;
-    margin: 26px auto 0;
-    border-radius: v.$radius-pill;
-    border: 1px solid v.$line-strong;
-    display: grid;
-    place-items: center;
-    background: linear-gradient(180deg, rgb(255 255 255 / 0.92), rgb(255 246 242 / 0.8));
-
-    .swan-symbol {
-        width: 62px;
-        height: 62px;
-        background-color: v.$accent;
-        mask-image: url('../assets/swan.svg');
-        mask-repeat: no-repeat;
-        mask-position: center;
-        mask-size: contain;
-        -webkit-mask-image: url('../assets/swan.svg');
-        -webkit-mask-repeat: no-repeat;
-        -webkit-mask-position: center;
-        -webkit-mask-size: contain;
-    }
+// Date: Event date styling
+.hero__date {
+  margin-top: ds.$space-3;
+  color: ds.$color-accent;
+  font-weight: ds.$weight-semibold;
+  letter-spacing: ds.$letter-spacing-wide;
+  font-family: ds.$font-body;
+  font-size: ds.$font-size-base;
 }
 
-@keyframes hero-fade-up {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+// Intro: Invitation message
+.hero__intro {
+  margin: ds.$space-3 auto 0;
+  max-width: 53ch;
+  color: ds.$color-text-secondary;
+  font-family: ds.$font-body;
+  font-size: ds.$font-size-base;
+  line-height: ds.$line-height-relaxed;
+  letter-spacing: ds.$letter-spacing-normal;
 }
 
-@media (max-width: v.$bp-mobile) {
-    .hero {
-        border-radius: 24px 24px 10px 10px;
-        padding: 34px 18px 26px;
-    }
+// Swan Seal: Decorative circle with swan symbol
+.hero__swan-seal {
+  width: 104px;
+  height: 104px;
+  margin: ds.$space-6 auto 0;
+  border-radius: ds.$radius-pill;
+  border: ds.$border-width-thin solid ds.$color-border-primary;
+  display: grid;
+  place-items: center;
+  background: ds.$color-bg-primary;
+  box-shadow: ds.$shadow-sm;
+  @include ds.transition-smooth;
 
-    .hero-divider .line {
-        width: 46px;
-    }
+  &:hover {
+    box-shadow: ds.$shadow-md;
+  }
+}
+
+.hero__swan-symbol {
+  width: 62px;
+  height: 62px;
+  background-color: ds.$color-accent;
+  mask-image: url('../assets/swan.svg');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-image: url('../assets/swan.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
 }

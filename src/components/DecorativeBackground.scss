@@ -1,53 +1,45 @@
-@use '../styles/variables' as v;
+@use '../styles/design-system' as ds;
 
+// Decorative background: Clean, minimalist botanical aesthetic
 .atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: ds.$z-background;
+  background: ds.$color-bg-primary;
+
+  // Subtle gradient (optional refinement)
+  background: linear-gradient(170deg,
+      ds.$color-white,
+      ds.$color-cream 50%,
+      ds.$color-cream-soft 100%);
+
+  // Subtle noise texture overlay (optional, very light)
+  &::before {
+    content: '';
     position: absolute;
     inset: 0;
-    z-index: -3;
-    background:
-        radial-gradient(circle at 12% 15%, rgb(255 235 225 / 0.75), transparent 35%),
-        radial-gradient(circle at 80% 12%, rgb(255 246 230 / 0.85), transparent 42%),
-        radial-gradient(circle at 50% 95%, rgb(243 219 213 / 0.8), transparent 45%),
-        linear-gradient(170deg, #fffefd, #f8edea 56%, #fff9f6);
-
-    &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        opacity: 0.18;
-        background-image: radial-gradient(rgb(112 74 58 / 0.24) 0.55px, transparent 0.55px);
-        background-size: 4px 4px;
-    }
-}
-
-.petals {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
+    opacity: 0.05; // Very subtle
+    background-image: radial-gradient(rgba(ds.$color-black, 0.08) 0.5px,
+        transparent 0.5px);
+    background-size: 4px 4px;
     pointer-events: none;
-
-    &::before,
-    &::after {
-        content: '✿ ❀ ✿ ❁ ✿ ❀ ✿';
-        position: absolute;
-        font-size: 24px;
-        color: rgb(186 108 121 / 0.2);
-        letter-spacing: 0.45em;
-    }
-
-    &::before {
-        top: 30px;
-        left: 32px;
-    }
-
-    &::after {
-        right: 18px;
-        bottom: 38px;
-    }
+  }
 }
 
-@media (max-width: v.$bp-mobile) {
-    .petals {
-        display: none;
+// Decorative petals: Removed for minimalist aesthetic
+// The botanical elements (flowers, borders) now live in Card corners
+// via BotanicalBorder component, providing more structured decoration
+.petals {
+  display: none; // Hidden in new design; botanical elements integrated into cards
+}
+
+// Responsive adjustments
+@media (max-width: ds.$bp-tablet) {
+  .atmosphere {
+    background: ds.$color-white;
+
+    &::before {
+      opacity: 0.03; // Even more subtle on mobile
     }
+  }
 }

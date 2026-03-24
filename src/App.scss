@@ -1,18 +1,27 @@
-@use './styles/variables' as v;
+@use './styles/design-system' as ds;
 
+// Main page layout: Centered, single-column card stack
 .invite-page {
-    position: relative;
-    min-height: 100svh;
-    padding: 68px 24px 80px;
-    display: grid;
-    justify-items: center;
-    gap: 26px;
-    isolation: isolate;
+  position: relative;
+  min-height: 100svh;
+  padding: ds.$space-16 ds.$space-6 ds.$space-20;
+  display: grid;
+  justify-items: center;
+  align-items: start;
+  gap: ds.$gap-sections-desktop;
+  isolation: isolate;
+
+  // Background is cream/white (from DecorativeBackground)
+  background-color: ds.$color-bg-primary;
 }
 
-@media (max-width: v.$bp-mobile) {
-    .invite-page {
-        padding: 34px 12px 48px;
-        gap: 16px;
-    }
+// ============================================================================
+// RESPONSIVE: Mobile adjustments
+// ============================================================================
+
+@media (max-width: ds.$bp-tablet) {
+  .invite-page {
+    padding: ds.$space-12 ds.$space-4 ds.$space-12;
+    gap: ds.$gap-sections-mobile;
+  }
 }

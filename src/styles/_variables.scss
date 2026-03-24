@@ -1,26 +1,44 @@
-$font-body: 'Nunito Sans', sans-serif;
-$font-display: 'Great Vibes', serif;
+// Import new design system (monochromatic botanical aesthetic)
+@use './design-system' as ds;
 
-$bg-fallback: #fffaf7;
-$text-main: #573c37;
-$text-soft: #755a53;
-$text-muted: #946d62;
+// ============================================================================
+// BACKWARDS COMPATIBILITY ALIASES
+// ============================================================================
+// Legacy variables mapped to new design system tokens for gradual migration
+// Old components can continue using these aliases while new components use design-system
 
-$line-soft: rgb(182 125 111 / 0.28);
-$line-strong: rgb(196 108 133 / 0.4);
-$line-input: rgb(179 131 114 / 0.35);
+// Font aliases
+$font-body: ds.$font-body; // Already defined in design-system
+$font-display: ds.$font-display; // Already defined in design-system
 
-$surface-start: rgb(255 255 255 / 0.9);
-$surface-end: rgb(255 247 243 / 0.82);
+// Color aliases (old warm palette → new monochromatic palette)
+// These maintain backwards compatibility for components not yet refactored
+$bg-fallback: ds.$color-cream; // New cream background
+$text-main: ds.$color-text-primary; // New black text
+$text-soft: ds.$color-text-secondary; // New gray text
+$text-muted: ds.$color-text-muted; // New light gray text
 
-$accent: #c86f8d;
-$accent-deep: #ad5f78;
+// Border aliases
+$line-soft: rgba(ds.$color-dark-gray, 0.15); // Softer border
+$line-strong: rgba(ds.$color-dark-gray, 0.25); // Stronger border
+$line-input: rgba(ds.$color-dark-gray, 0.2); // Input border
 
-$radius-panel: 12px;
-$radius-pill: 999px;
-$radius-field: 10px;
+// Surface aliases (new: simple backgrounds instead of gradients)
+$surface-start: ds.$color-white;
+$surface-end: ds.$color-cream;
 
-$shadow-card: 0 18px 48px rgb(120 80 68 / 0.16);
-$shadow-button: 0 14px 26px rgb(140 72 92 / 0.3);
+// Accent aliases (old mauve → new sage green)
+$accent: ds.$color-accent; // New sage green accent
+$accent-deep: ds.$color-accent-dark; // Darker sage for deep accents
 
-$bp-mobile: 760px;
+// Radius aliases
+$radius-panel: ds.$card-radius-bottom;
+$radius-pill: ds.$radius-pill;
+$radius-field: ds.$radius-md;
+
+// Shadow aliases
+$shadow-card: ds.$shadow-xl;
+$shadow-button: ds.$shadow-button;
+
+// Breakpoint
+$bp-mobile: ds.$bp-tablet;

@@ -1,0 +1,40 @@
+@use '../styles/design-system' as ds;
+
+.card-content {
+  // Content container with consistent spacing and layout
+
+  // Spacing around content
+  &:not(:first-child) {
+    margin-top: ds.$space-6;
+  }
+
+  // Ensure proper text rendering
+  line-height: ds.$line-height-normal;
+  color: ds.$color-text-primary;
+
+  // Typography defaults for direct children
+  p {
+    font-family: ds.$font-body;
+    font-size: ds.$font-size-base;
+    font-weight: ds.$weight-regular;
+    letter-spacing: ds.$letter-spacing-normal;
+    margin: 0 0 ds.$space-4 0;
+    line-height: ds.$line-height-relaxed;
+    color: ds.$color-text-primary;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: ds.$bp-tablet) {
+    &:not(:first-child) {
+      margin-top: ds.$space-4;
+    }
+
+    p {
+      font-size: ds.$font-size-base;
+    }
+  }
+}
