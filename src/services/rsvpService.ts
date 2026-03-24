@@ -1,14 +1,22 @@
-const RSVP_API_URL = 'https://example.com/api/rsvp'
+const apiUrl: string = import.meta.env.VITE_API_URL;
+const apiKey: string = import.meta.env.VITE_API_PUBLICKEY;
 
-export type RsvpPayload = {
+export type RsvpForm = {
     guestName: string
     guestCount: number
     guestMessage: string
     dietaryRestrictions: string
 }
 
-export async function submitRsvp(payload: RsvpPayload): Promise<void> {
-    const response = await fetch(RSVP_API_URL, {
+export async function submitRsvp(form: RsvpForm): Promise<void> {
+
+    const payload = {
+        ...form,
+        subject: "Anmeldung von " + form.guestName,
+        access_key: apiKey
+    }
+
+    const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

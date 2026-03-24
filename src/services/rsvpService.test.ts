@@ -1,4 +1,4 @@
-import { submitRsvp, type RsvpPayload } from './rsvpService'
+import { submitRsvp, type RsvpForm } from './rsvpService'
 
 // Mock fetch globally
 globalThis.fetch = jest.fn() as jest.Mock
@@ -9,7 +9,7 @@ describe('rsvpService', () => {
     })
 
     describe('submitRsvp', () => {
-        const mockPayload: RsvpPayload = {
+        const mockPayload: RsvpForm = {
             guestName: 'John Doe',
             guestCount: 2,
             guestMessage: 'Looking forward to it!',
@@ -86,7 +86,7 @@ describe('rsvpService', () => {
                 ok: true,
             } as Response)
 
-            const payloadWithEmptyMessage: RsvpPayload = {
+            const payloadWithEmptyMessage: RsvpForm = {
                 ...mockPayload,
                 guestMessage: '',
             }
