@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { Card } from './Card'
 import { CardContent } from './CardContent'
 import './RsvpSection.scss'
@@ -24,6 +24,14 @@ function RsvpSection() {
   const [submitError, setSubmitError] = useState(false)
   const [formErrors, setFormErrors] = useState<FormErrors>({})
   const [hasDietaryRestrictions, setHasDietaryRestrictions] = useState(false)
+
+  const submitErrorRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (submitError && submitErrorRef) {
+      submitErrorRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+  }, [submitError])
 
   const clearFieldError = (field: keyof FormErrors) => {
     setFormErrors((previousErrors) => {
@@ -200,7 +208,7 @@ function RsvpSection() {
               </button>
 
               {submitError && (
-                <div className="rsvp__submit-error" role="alert">
+                <div className="rsvp__submit-error" role="alert" ref={submitErrorRef}>
                   <span className="rsvp__submit-error-icon" aria-hidden="true">
                     ⚠️
                   </span>

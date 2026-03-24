@@ -5,6 +5,9 @@
   // Card styling is inherited from Card component
   text-align: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   // Remove inherited padding to control it here
   padding: ds.$card-padding-desktop;
