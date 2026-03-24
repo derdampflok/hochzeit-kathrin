@@ -254,6 +254,7 @@ $z-tooltip: 300;
 // Responsive Text Sizing
 @mixin text-responsive($mobile-size, $desktop-size) {
   font-size: $mobile-size;
+
   @media (min-width: $bp-tablet) {
     font-size: $desktop-size;
   }
@@ -262,6 +263,7 @@ $z-tooltip: 300;
 // Responsive Padding
 @mixin padding-responsive($mobile, $desktop) {
   padding: $mobile;
+
   @media (min-width: $bp-tablet) {
     padding: $desktop;
   }
