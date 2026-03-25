@@ -5,6 +5,10 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: ds.$space-3;
+
+    @media (max-width: ds.$bp-tablet) {
+        gap: ds.$space-12;
+    }
 }
 
 .map-wrapper {
@@ -21,7 +25,7 @@
 }
 
 .map-address {
-    margin: 0;
+    margin: -8px 0 8px;
     display: flex;
     flex-direction: column;
     gap: ds.$space-1;
