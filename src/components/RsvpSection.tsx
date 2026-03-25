@@ -8,8 +8,8 @@ import CardHeader from './CardHeader'
 type Attendance = 'ja' | 'nein'
 
 type FormErrors = {
-  guestName?: string
   guestCount?: string
+  guestNames?: Record<number, string>
 }
 
 /**
@@ -18,6 +18,7 @@ type FormErrors = {
  * Handles guest registration with name, guest count, dietary restrictions,
  * and optional message. Uses Card wrapper with botanical minimalist styling.
  *
+ * When attendance is "ja", shows multiple name fields for each guest.
  * Form validation, submission state, and error handling managed locally.
  * German text throughout.
  */
@@ -28,6 +29,8 @@ function RsvpSection() {
   const [formErrors, setFormErrors] = useState<FormErrors>({})
   const [hasDietaryRestrictions, setHasDietaryRestrictions] = useState(false)
   const [attendance, setAttendance] = useState<Attendance | null>(null)
+  const [guestCount, setGuestCount] = useState<number | null>(null)
+  const [guestNames, setGuestNames] = useState<string[]>([])
 
   const submitErrorRef = useRef<HTMLDivElement>(null)
 
@@ -49,18 +52,56 @@ function RsvpSection() {
     })
   }
 
-  const handleGuestNameChange = (_event: ChangeEvent<HTMLInputElement>) => {
-    clearFieldError('guestName')
+  const clearGuestNameError = (index: number) => {
+    setFormErrors((previousErrors) => {
+      if (!previousErrors.guestNames?.[index]) {
+        return previousErrors
+      }
+
+      const nextGuestNames = { ...previousErrors.guestNames }
+      delete nextGuestNames[index]
+
+      if (Object.keys(nextGuestNames).length === 0) {
+        const { guestNames, ...otherErrors } = previousErrors
+        return otherErrors
+      }
+
+      return {
+        ...previousErrors,
+        guestNames: nextGuestNames,
+      }
+    })
   }
 
-  const handleGuestCountChange = (_event: ChangeEvent<HTMLInputElement>) => {
-    clearFieldError('guestCount')
+  const handleGuestCountChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.value.trim()
+    if (!value) {
+      setGuestCount(null)
+      setGuestNames([])
+      return
+    }
+
+    const parsed = Number.parseInt(value, 10)
+    if (!Number.isNaN(parsed) && parsed > 0) {
+      setGuestCount(parsed)
+      setGuestNames(Array(parsed).fill(''))
+      clearFieldError('guestCount')
+    }
+  }
+
+  const handleGuestNameChange = (index: number, value: string) => {
+    const nextNames = [...guestNames]
+    nextNames[index] = value
+    setGuestNames(nextNames)
+    clearGuestNameError(index)
   }
 
   const handleAttendanceChange = (value: Attendance) => {
     setAttendance(value)
     if (value === 'nein') {
       setHasDietaryRestrictions(false)
+      setGuestCount(null)
+      setGuestNames([])
       setFormErrors({})
     }
   }
@@ -72,27 +113,36 @@ function RsvpSection() {
 
     const formElement = event.currentTarget
     const formData = new FormData(formElement)
-    const guestName = String(formData.get('guestName') ?? '').trim()
     const nextErrors: FormErrors = {}
 
-    if (!guestName) {
-      nextErrors.guestName = 'Bitte gib deinen Namen ein.'
-    }
+    let guestCountValue: number | undefined
 
-    let guestCount: number | undefined
     if (attendance === 'ja') {
+      // Validate guest count
       const guestCountRaw = String(formData.get('guestCount') ?? '').trim()
       const parsed = Number.parseInt(guestCountRaw, 10)
       if (!guestCountRaw || Number.isNaN(parsed) || parsed < 1) {
         nextErrors.guestCount = 'Bitte gib eine gültige Anzahl an Personen ein.'
       } else {
-        guestCount = parsed
+        guestCountValue = parsed
       }
-    }
 
-    if (Object.keys(nextErrors).length > 0) {
-      setFormErrors(nextErrors)
-      return
+      // Validate all guest names
+      const nameErrors: Record<number, string> = {}
+      guestNames.forEach((name, index) => {
+        if (!name.trim()) {
+          nameErrors[index] = 'Bitte fülle diesen Namen aus.'
+        }
+      })
+
+      if (Object.keys(nameErrors).length > 0) {
+        nextErrors.guestNames = nameErrors
+      }
+
+      if (Object.keys(nextErrors).length > 0) {
+        setFormErrors(nextErrors)
+        return
+      }
     }
 
     setFormErrors({})
@@ -109,8 +159,8 @@ function RsvpSection() {
 
     try {
       await submitRsvp({
-        guestName,
-        guestCount,
+        guestNames: attendance === 'ja' ? guestNames : [String(formData.get('guestName') ?? '').trim()],
+        guestCount: guestCountValue,
         guestMessage,
         dietaryRestrictions,
         attendance,
@@ -172,7 +222,7 @@ function RsvpSection() {
                 </div>
               </fieldset>
 
-              {attendance !== null && (
+              {attendance !== null && attendance === 'nein' && (
                 <>
                   <label htmlFor="guestName">Name</label>
                   <input
@@ -182,15 +232,7 @@ function RsvpSection() {
                     autoComplete="name"
                     placeholder="Dein Name"
                     required
-                    onChange={handleGuestNameChange}
-                    aria-invalid={Boolean(formErrors.guestName)}
-                    aria-describedby={formErrors.guestName ? 'guestNameError' : undefined}
                   />
-                  {formErrors.guestName && (
-                    <p id="guestNameError" className="rsvp__form-error" role="alert">
-                      {formErrors.guestName}
-                    </p>
-                  )}
                 </>
               )}
 
@@ -215,6 +257,50 @@ function RsvpSection() {
                     </p>
                   )}
 
+                  {guestCount !== null && guestCount > 0 && (
+                    <fieldset className="rsvp__guest-names">
+                      {guestNames.map((name, index) => (
+                        <div key={index} className="rsvp__guest-name-field">
+                          <label htmlFor={`guestName${index}`}>
+                            Name Person {index + 1}
+                          </label>
+                          <input
+                            id={`guestName${index}`}
+                            type="text"
+                            autoComplete={index === 0 ? 'name' : 'off'}
+                            placeholder={`Name Person ${index + 1}`}
+                            value={name}
+                            onChange={(e) =>
+                              handleGuestNameChange(index, e.currentTarget.value)
+                            }
+                            required
+                            aria-invalid={Boolean(
+                              formErrors.guestNames?.[index]
+                            )}
+                            aria-describedby={
+                              formErrors.guestNames?.[index]
+                                ? `guestNameError${index}`
+                                : undefined
+                            }
+                          />
+                          {formErrors.guestNames?.[index] && (
+                            <p
+                              id={`guestNameError${index}`}
+                              className="rsvp__form-error"
+                              role="alert"
+                            >
+                              {formErrors.guestNames[index]}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </fieldset>
+                  )}
+                </>
+              )}
+
+              {attendance === 'ja' && (
+                <>
                   <div className="rsvp__toggle-row">
                     <input
                       id="hasDietaryRestrictions"
@@ -223,7 +309,7 @@ function RsvpSection() {
                       onChange={(e) => setHasDietaryRestrictions(e.target.checked)}
                     />
                     <label htmlFor="hasDietaryRestrictions">
-                      Ich habe Lebensmittelallergien oder Unverträglichkeiten
+                      Mindestens eine Person hat Lebensmittelallergien oder Unverträglichkeiten
                     </label>
                   </div>
 

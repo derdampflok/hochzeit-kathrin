@@ -188,7 +188,7 @@
 // Form error message
 .rsvp__form-error {
   margin: ds.$space-2 0 0;
-  color: ds.$color-error;
+  color: ds.$color-error !important;
   font-family: ds.$font-body;
   font-size: ds.$font-size-sm;
   font-weight: ds.$weight-semibold;
@@ -275,6 +275,28 @@
 
   &:focus-within {
     @include ds.focus-ring;
+  }
+}
+
+// Guest names section (multiple name inputs)
+.rsvp__guest-names {
+  border: none;
+  margin: ds.$space-2 0;
+  padding: 0;
+}
+
+.rsvp__guest-name-field {
+  display: grid;
+  gap: ds.$space-1;
+  margin-bottom: ds.$space-2;
+
+  label {
+    color: ds.$color-text-primary;
+    text-transform: uppercase;
+    letter-spacing: ds.$letter-spacing-wide;
+    font-size: ds.$font-size-xs;
+    font-weight: ds.$weight-semibold;
+    font-family: ds.$font-body;
   }
 }
 

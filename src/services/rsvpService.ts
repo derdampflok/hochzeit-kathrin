@@ -2,7 +2,7 @@ const apiUrl: string = import.meta.env.VITE_API_URL;
 const apiKey: string = import.meta.env.VITE_API_PUBLICKEY;
 
 export type RsvpForm = {
-    guestName: string
+    guestNames: string[]
     guestCount?: number
     guestMessage: string
     dietaryRestrictions: string
@@ -13,7 +13,7 @@ export async function submitRsvp(form: RsvpForm): Promise<void> {
 
     const payload = {
         ...form,
-        subject: "Anmeldung von " + form.guestName,
+        subject: "Anmeldung von " + form.guestNames[0],
         access_key: apiKey
     }
 

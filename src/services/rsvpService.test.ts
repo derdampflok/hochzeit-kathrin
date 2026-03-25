@@ -10,10 +10,11 @@ describe('rsvpService', () => {
 
     describe('submitRsvp', () => {
         const mockPayload: RsvpForm = {
-            guestName: 'John Doe',
+            guestNames: ['John Doe', 'Jane Doe'],
             guestCount: 2,
             guestMessage: 'Looking forward to it!',
             dietaryRestrictions: '',
+            attendance: 'ja',
         }
 
         it('should submit RSVP data with correct request format', async () => {
