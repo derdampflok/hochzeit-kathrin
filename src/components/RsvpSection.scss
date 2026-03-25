@@ -39,16 +39,6 @@
   animation: rsvp-spin 0.9s linear infinite;
 }
 
-// Main title
-.rsvp__title {
-  margin: 0;
-  font-family: ds.$font-display;
-  font-size: clamp(1.5rem, 4.2vw, 1.875rem); // Responsive
-  color: ds.$color-text-primary;
-  letter-spacing: ds.$letter-spacing-tight;
-  font-weight: ds.$weight-regular;
-}
-
 // Subtitle note
 .rsvp__note {
   margin-top: ds.$space-2;
@@ -60,10 +50,18 @@
 
 // Thank you section
 .rsvp__thank-you {
-  min-height: 260px;
+  min-height: 200px;
   display: grid;
   align-content: center;
   gap: ds.$space-2;
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.5rem, 4.2vw, 1.875rem); // Responsive
+    color: ds.$color-text-primary;
+    letter-spacing: ds.$letter-spacing-tight;
+    font-weight: ds.$weight-regular;
+  }
 }
 
 // Form styling
@@ -74,7 +72,7 @@
 
   // Labels for form fields
   label {
-    color: ds.$color-text-muted;
+    color: ds.$color-text-primary;
     text-transform: uppercase;
     letter-spacing: ds.$letter-spacing-wide;
     font-size: ds.$font-size-xs;
@@ -109,7 +107,7 @@
   }
 
   // Button styling (submit button)
-  button {
+  button[type='submit'] {
     margin-top: ds.$space-2;
     border: ds.$border-width-thin solid rgba(ds.$color-accent, 0.4);
     border-radius: ds.$radius-pill;
@@ -227,6 +225,56 @@
     font-family: ds.$font-body;
     font-size: ds.$font-size-sm;
     line-height: ds.$line-height-normal;
+  }
+}
+
+// Attendance radio selector (Kommst du? Ja/Nein)
+.rsvp__attendance {
+  border: none;
+  margin: 0 0 5px;
+  padding: 0;
+}
+
+.rsvp__attendance-legend {
+  text-transform: uppercase;
+  letter-spacing: ds.$letter-spacing-wide;
+  font-size: ds.$font-size-xs;
+  font-weight: ds.$weight-semibold;
+  font-family: ds.$font-body;
+  margin-bottom: ds.$space-3;
+}
+
+.rsvp__attendance-options {
+  display: flex;
+  gap: ds.$space-2;
+}
+
+.rsvp__attendance-option {
+  display: inline-flex;
+  align-items: center;
+  padding: ds.$space-2 ds.$space-5;
+  border-radius: ds.$radius-pill;
+  border: ds.$border-width-thin solid ds.$color-border-secondary;
+  background: ds.$color-bg-primary;
+  color: ds.$color-text-secondary;
+  font-family: ds.$font-body;
+  font-size: ds.$font-size-base;
+  cursor: pointer;
+  user-select: none;
+  @include ds.transition-smooth;
+
+  &:hover {
+    border-color: ds.$color-accent;
+  }
+
+  &--selected {
+    background: ds.$color-accent;
+    border-color: ds.$color-accent;
+    color: ds.$color-text-primary;
+  }
+
+  &:focus-within {
+    @include ds.focus-ring;
   }
 }
 

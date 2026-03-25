@@ -1,7 +1,6 @@
 @use '../styles/design-system' as ds;
 
 .card {
-  // Base card styling using botanical minimalist aesthetic
   @include ds.card-base;
   @include ds.transition-smooth;
 
@@ -15,16 +14,6 @@
   max-width: 860px;
   width: 100%;
 
-  // Ensure content doesn't overflow
-  overflow: visible; // Changed to visible to show botanical borders
-
-  // Position context for absolutely positioned botanical borders
-  position: relative;
-
-  // Variant: Memories section (grid container, no padding on card)
-  // Padding handled at grid level inside CardContent
-
-  // Variant: RSVP section (form container, default styling)
 
   // Hover state (subtle lift and shadow enhancement)
   &:hover {

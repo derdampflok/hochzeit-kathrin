@@ -3,9 +3,10 @@ const apiKey: string = import.meta.env.VITE_API_PUBLICKEY;
 
 export type RsvpForm = {
     guestName: string
-    guestCount: number
+    guestCount?: number
     guestMessage: string
     dietaryRestrictions: string
+    attendance: 'ja' | 'nein'
 }
 
 export async function submitRsvp(form: RsvpForm): Promise<void> {
