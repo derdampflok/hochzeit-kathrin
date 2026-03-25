@@ -193,8 +193,8 @@ function RsvpSection() {
           <section className="rsvp__thank-you" aria-label="Vielen Dank">
             <h2>Vielen Dank!</h2>
             <p className="rsvp__note">
-              Deine Rückmeldung ist bei uns angekommen. Wir freuen uns sehr, dich an
-              unserem besonderen Tag dabei zu haben. ✨
+              Deine Rückmeldung ist bei uns angekommen.
+              {attendance === "ja" && "Wir freuen uns sehr, dich an unserem besonderen Tag dabei zu haben. ✨"}
             </p>
           </section>
         ) : (

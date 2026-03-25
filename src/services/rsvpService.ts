@@ -12,7 +12,10 @@ export type RsvpForm = {
 export async function submitRsvp(form: RsvpForm): Promise<void> {
 
     const payload = {
-        ...form,
+        "Gast/Gäste": form.guestNames.join(", "),
+        "Nimmt Teil": form.attendance,
+        "Essenseinschränkungen": form.dietaryRestrictions,
+        "Nachricht": form.guestMessage,
         subject: "Anmeldung von " + form.guestNames[0],
         access_key: apiKey
     }
