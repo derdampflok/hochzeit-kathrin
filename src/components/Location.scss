@@ -7,10 +7,32 @@
     gap: ds.$space-3;
 }
 
+.map-wrapper {
+    width: 100%;
+    max-width: 360px;
+    flex: 1 1 320px;
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    gap: ds.$space-2;
+}
+
+.map-wrapper h3 {
+    margin: 0;
+}
+
+.map-address {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: ds.$space-1;
+    font-style: normal;
+    color: ds.$color-text-secondary;
+    font-size: ds.$font-size-sm;
+    line-height: ds.$line-height-normal;
+}
+
 .location-map {
     border: 0;
     width: 100%;
-    max-width: 360px;
     height: 300px;
-    flex: 1 1 320px;
 }

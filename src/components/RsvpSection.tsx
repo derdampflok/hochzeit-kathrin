@@ -186,7 +186,11 @@ function RsvpSection() {
         </div>
       )}
 
-      <CardHeader title="Deine Rückmeldung" />
+      <CardHeader
+        title="Deine Rückmeldung"
+        subtitle="Bitte gib uns kurz Bescheid, ob du dabei bist."
+        className="rsvp__header"
+      />
 
       <CardContent className="rsvp__content">
         {isSubmitted ? (
@@ -205,7 +209,9 @@ function RsvpSection() {
             </p>
 
             <form className="rsvp__form" onSubmit={handleSubmit} noValidate>
-              <fieldset className="rsvp__attendance">
+              <fieldset
+                className={`rsvp__attendance${attendance === null ? ' rsvp__attendance--pending' : ''}`}
+              >
                 <legend className="rsvp__attendance-legend">Kommst du?</legend>
                 <div className="rsvp__attendance-options">
                   {(['ja', 'nein'] as const).map((value) => (
