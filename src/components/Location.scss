@@ -1,0 +1,16 @@
+@use '../styles/design-system' as ds;
+
+.location-maps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: ds.$space-3;
+}
+
+.location-map {
+    border: 0;
+    width: 100%;
+    max-width: 360px;
+    height: 300px;
+    flex: 1 1 320px;
+}
