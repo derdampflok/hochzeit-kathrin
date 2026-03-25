@@ -21,11 +21,6 @@
   // Position context for absolutely positioned botanical borders
   position: relative;
 
-  // Variant: Hero section (refined rounded top)
-  &--hero {
-    border-radius: ds.$card-radius-top + 4px ds.$card-radius-top + 4px ds.$card-radius-bottom ds.$card-radius-bottom;
-  }
-
   // Variant: Memories section (grid container, no padding on card)
   // Padding handled at grid level inside CardContent
 

@@ -104,7 +104,6 @@ function RsvpSection() {
 
   return (
     <Card
-      variant="rsvp"
       className={`rsvp${isSubmitting ? ' rsvp--loading' : ''}`}
       aria-label="Antwortformular"
     >

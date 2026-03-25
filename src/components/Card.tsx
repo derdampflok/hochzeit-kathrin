@@ -10,8 +10,6 @@ interface CardProps {
   style?: CSSProperties
   /** Optional animation delay (in seconds) for staggered reveals */
   animationDelay?: number
-  /** Optional variant for future styling specialization */
-  variant?: 'default' | 'hero' | 'memories' | 'rsvp'
 }
 
 /**
@@ -28,11 +26,10 @@ export function Card({
   className = '',
   style = {},
   animationDelay = 0,
-  variant = 'default'
 }: CardProps) {
   return (
     <div
-      className={`card card--${variant} ${className}`.trim()}
+      className={`card ${className}`.trim()}
       style={
         {
           '--animation-delay': `${animationDelay}s`,

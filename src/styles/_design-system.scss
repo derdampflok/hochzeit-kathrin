@@ -45,9 +45,19 @@ $color-warning: #b89968; // Warning (muted amber)
 // TYPOGRAPHY SCALE
 // ============================================================================
 
+@font-face {
+  font-family: NewIconScript;
+  src: url("../assets/new-icon-script_fontlot26ec.otf") format("opentype");
+}
+
+@font-face {
+  font-family: LovelaceText;
+  src: url("../assets/Zetafonts\ -\ Lovelace\ Text\ Regular.otf") format("opentype");
+}
+
 // Font Families (existing from _variables.scss, preserved)
-$font-display: 'Great Vibes', serif;
-$font-body: 'Nunito Sans', sans-serif;
+$font-display: 'NewIconScript', 'Great Vibes', serif;
+$font-body: 'LovelaceText', 'Nunito Sans', sans-serif;
 
 // Line Heights
 $line-height-tight: 1.2;

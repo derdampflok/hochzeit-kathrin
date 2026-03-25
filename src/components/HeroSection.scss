@@ -1,44 +1,38 @@
 @use '../styles/design-system' as ds;
 
-// HeroSection: Main invitation card with refined botanical styling
 .hero {
-  // Card styling is inherited from Card component
   text-align: center;
   position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
 
-  // Remove inherited padding to control it here
   padding: ds.$card-padding-desktop;
 
   @media (max-width: ds.$bp-tablet) {
     padding: ds.$card-padding-mobile;
   }
-}
 
-// Kicker: "Wir heiraten" label
-.hero__kicker {
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: ds.$letter-spacing-widest;
-  font-size: ds.$font-size-sm;
-  color: ds.$color-text-muted;
-  font-family: ds.$font-body;
-  font-weight: ds.$weight-regular;
+  &.rings-background {
+    height: 50vh;
+    background-image: url('../assets/kathrin-richard.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 }
 
 // Title: Couple names (Great Vibes display font)
 .hero__title {
-  margin: ds.$space-3 0 0;
+  margin: ds.$space-1 0 0;
   font-family: ds.$font-display;
   font-size: clamp(1.875rem, 7.3vw, 2.25rem); // Responsive: 30px → 36px
   line-height: ds.$line-height-tight;
   letter-spacing: ds.$letter-spacing-tight;
   color: ds.$color-text-primary;
-  font-weight: ds.$weight-regular;
+  font-weight: ds.$weight-semibold;
 
   @media (max-width: ds.$bp-tablet) {
+    word-spacing: 100vw;
     font-size: 1.875rem;
   }
 }
@@ -107,14 +101,14 @@
 }
 
 .hero__swan-symbol {
-  width: 62px;
-  height: 62px;
+  width: 84px;
+  height: 84px;
   background-color: ds.$color-accent;
-  mask-image: url('../assets/swan.svg');
+  mask-image: url('../assets/swans-lebedev.svg');
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
-  -webkit-mask-image: url('../assets/swan.svg');
+  -webkit-mask-image: url('../assets/swans-lebedev.svg');
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
   -webkit-mask-size: contain;
