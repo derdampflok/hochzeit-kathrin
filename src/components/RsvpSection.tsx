@@ -188,7 +188,6 @@ function RsvpSection() {
 
       <CardHeader
         title="Deine Rückmeldung"
-        subtitle="Bitte gib uns kurz Bescheid, ob du dabei bist."
         className="rsvp__header"
       />
 
@@ -204,15 +203,15 @@ function RsvpSection() {
         ) : (
           <>
             <p className="rsvp__note">
-              Wir freuen uns auf deine Antwort und darauf, diesen besonderen Tag gemeinsam
-              zu erleben. 🦢
+              Wir freuen uns auf deine Antwort bis zum 10.05.2026 und darauf,
+              diesen besonderen Tag mit euch zu verbringen!
             </p>
 
             <form className="rsvp__form" onSubmit={handleSubmit} noValidate>
               <fieldset
                 className={`rsvp__attendance${attendance === null ? ' rsvp__attendance--pending' : ''}`}
               >
-                <legend className="rsvp__attendance-legend">Kommst du?</legend>
+                <legend className="rsvp__attendance-legend">Bist du dabei?</legend>
                 <div className="rsvp__attendance-options">
                   {(['ja', 'nein'] as const).map((value) => (
                     <button
