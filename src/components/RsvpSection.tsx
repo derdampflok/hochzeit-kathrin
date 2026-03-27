@@ -328,7 +328,7 @@ function RsvpSection() {
                         id="dietaryRestrictions"
                         name="dietaryRestrictions"
                         rows={3}
-                        placeholder="z. B. Laktoseintoleranz, Nussallergie"
+                        placeholder="z. B. Laktoseintoleranz, Nussallergie, Vegan"
                       />
                     </>
                   )}
