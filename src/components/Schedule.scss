@@ -1,0 +1,49 @@
+@use '../styles/design-system' as ds;
+
+.schedule-timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: ds.$space-4;
+}
+
+.schedule-timeline__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    align-items: start;
+    column-gap: ds.$space-4;
+
+    &:not(:last-child) {
+        padding-bottom: ds.$space-2;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 25px;
+            bottom: -12px;
+            width: 1px;
+            background-color: ds.$color-border-secondary;
+        }
+    }
+}
+
+.schedule-timeline__dot {
+    width: 19px;
+    height: 19px;
+    border-radius: ds.$radius-pill;
+    border: ds.$border-width-thin solid ds.$color-border-primary;
+    background-color: ds.$color-bg-primary;
+    display: inline-block;
+    margin-top: 2px;
+}
+
+.schedule-timeline__entry {
+    margin: 0;
+    font-family: ds.$font-body;
+    font-size: ds.$font-size-base;
+    line-height: ds.$line-height-relaxed;
+    color: ds.$color-text-primary;
+}
