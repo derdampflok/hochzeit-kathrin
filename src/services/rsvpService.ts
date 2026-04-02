@@ -1,5 +1,5 @@
 const apiUrl: string = "https://api.web3forms.com/submit"
-const apiKey: string = "093412d4-c1c3-4766-b571-04193fe10876"
+const apiPublicKey: string = "093412d4-c1c3-4766-b571-04193fe10876"
 
 export type RsvpForm = {
     guestNames: string[]
@@ -17,7 +17,7 @@ export async function submitRsvp(form: RsvpForm): Promise<void> {
         "Essenseinschränkungen": form.dietaryRestrictions,
         "Nachricht": form.guestMessage,
         subject: "Anmeldung von " + form.guestNames[0],
-        access_key: apiKey
+        access_key: apiPublicKey
     }
 
     const response = await fetch(apiUrl, {
