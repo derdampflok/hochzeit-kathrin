@@ -21,8 +21,7 @@ function HeroSection() {
 
           <p className="hero__date">Samstag, 1. August 2026</p>
           <p className="hero__intro">
-            Von Herzen laden wir dich ein, mit uns Liebe, Freude und einen
-            unvergesslichen Tag zu feiern.
+            Wir heiraten und freuen uns schon riesig, diesen ganz besonderen Tag mit euch zu verbringen
           </p>
 
           <div className="hero__swan-seal" role="img" aria-label="Schwan Symbol">

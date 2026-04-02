@@ -12,7 +12,7 @@ const faqEntries = [
     },
     {
         question: 'Was soll ich euch schenken?',
-        answer: 'Bei Fragen rund um Geschenke und Überraschungen dürft ihr euch gerne direkt an unsere Trauzeugen Melanie (+4917656702109) und Arthur (+4917632245374) wenden',
+        answer: 'Bei Fragen rund um Geschenke und Überraschungen dürft ihr euch gerne direkt an unsere Trauzeugen (Siehe unten) wenden',
     },
     {
         question: 'Wo kann ich übernachten?',

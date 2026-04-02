@@ -60,6 +60,7 @@
     &:hover {
       // Disable hover lift on mobile (it feels awkward on touch)
       transform: none;
+      box-shadow: ds.$shadow-md;
     }
   }
 }
