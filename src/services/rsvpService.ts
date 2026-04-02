@@ -1,5 +1,5 @@
-const apiUrl: string = import.meta.env.VITE_API_URL;
-const apiKey: string = import.meta.env.VITE_API_PUBLICKEY;
+const apiUrl: string = "https://api.web3forms.com/submit"
+const apiKey: string = "093412d4-c1c3-4766-b571-04193fe10876"
 
 export type RsvpForm = {
     guestNames: string[]
