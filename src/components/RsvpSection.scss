@@ -340,6 +340,17 @@
   }
 }
 
+// Keep guest count keyboard-editable while removing browser spinner controls.
+#guestCount {
+  appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+}
+
 // ============================================================================
 // ANIMATIONS
 // ============================================================================

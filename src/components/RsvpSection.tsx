@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent, type SubmitEvent, type WheelEvent } from 'react'
 import { Card } from './Card'
 import { CardContent } from './CardContent'
 import './RsvpSection.scss'
@@ -89,6 +89,17 @@ function RsvpSection() {
     }
   }
 
+  const handleGuestCountWheel = (event: WheelEvent<HTMLInputElement>) => {
+    const inputElement = event.currentTarget
+    inputElement.blur()
+
+    window.setTimeout(() => {
+      if (document.contains(inputElement)) {
+        inputElement.focus({ preventScroll: true })
+      }
+    }, 0)
+  }
+
   const handleGuestNameChange = (index: number, value: string) => {
     const nextNames = [...guestNames]
     nextNames[index] = value
@@ -106,7 +117,7 @@ function RsvpSection() {
     }
   }
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (!attendance) return
@@ -249,10 +260,11 @@ function RsvpSection() {
                     name="guestCount"
                     type="number"
                     min={1}
-                    max={12}
+                    max={4}
                     placeholder="z. B. 2"
                     required
                     onChange={handleGuestCountChange}
+                    onWheel={handleGuestCountWheel}
                     aria-invalid={Boolean(formErrors.guestCount)}
                     aria-describedby={formErrors.guestCount ? 'guestCountError' : undefined}
                   />

@@ -9,7 +9,8 @@ function Location() {
             <CardHeader title="Location"></CardHeader>
             <CardContent className="location-maps">
                 <div className="map-wrapper">
-                    <h3>Trauung - Auferstehungskirche Fürth</h3>
+                    <p className="pre-heading">Trauung</p>
+                    <h3>Auferstehungskirche Fürth</h3>
                     <address className="map-address">
                         <span>Nürnberger Str. 15</span>
                         <span>90762 Fürth</span>
@@ -23,7 +24,8 @@ function Location() {
                     </iframe>
                 </div>
                 <div className="map-wrapper">
-                    <h3>Feier - Redoutensaal Erlangen</h3>
+                    <p className="pre-heading">Feier</p>
+                    <h3>Redoutensaal Erlangen</h3>
                     <address className="map-address">
                         <span>Theaterpl. 1</span>
                         <span>91054 Erlangen</span>

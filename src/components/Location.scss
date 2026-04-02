@@ -18,14 +18,21 @@
     display: grid;
     grid-template-rows: 1fr auto auto;
     gap: ds.$space-2;
+
+    .pre-heading {
+        margin: 0;
+        opacity: 50%;
+        font-size: ds.$font-size-sm;
+    }
+
+    h3 {
+        margin: -12px 0 0;
+    }
 }
 
-.map-wrapper h3 {
-    margin: 0;
-}
 
 .map-address {
-    margin: -8px 0 8px;
+    margin: 0 0 8px;
     display: flex;
     flex-direction: column;
     gap: ds.$space-1;

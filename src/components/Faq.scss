@@ -1,0 +1,108 @@
+@use '../styles/design-system' as ds;
+
+.faq-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+}
+
+.faq-item {
+    border-bottom: ds.$border-width-thin solid ds.$color-border-secondary;
+
+    &:first-child {
+        border-top: ds.$border-width-thin solid ds.$color-border-secondary;
+    }
+}
+
+.faq-item__trigger {
+    all: unset;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: ds.$space-4;
+    padding: ds.$space-5 0;
+    cursor: pointer;
+    font-family: ds.$font-body;
+    font-size: ds.$font-size-lg;
+    font-weight: ds.$weight-semibold;
+    color: ds.$color-text-primary;
+    letter-spacing: ds.$letter-spacing-wide;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: ds.$color-accent;
+    }
+
+    &:focus-visible {
+        outline: 2px solid ds.$color-accent;
+        outline-offset: 2px;
+        border-radius: ds.$radius-sm;
+    }
+}
+
+.faq-item__icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    position: relative;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        background-color: currentColor;
+        border-radius: 1px;
+        transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    &::before {
+        width: 16px;
+        height: 1.5px;
+    }
+
+    &::after {
+        width: 1.5px;
+        height: 16px;
+    }
+
+    .faq-item__trigger--open & {
+        &::after {
+            transform: rotate(90deg);
+            opacity: 0;
+        }
+    }
+}
+
+.faq-item__body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+
+    &--open {
+        max-height: 250px;
+    }
+
+    &[hidden] {
+        display: block; // override hidden to allow CSS animation
+        visibility: hidden;
+    }
+
+    &--open[hidden] {
+        visibility: visible;
+    }
+}
+
+p.faq-item__answer {
+    margin: 0;
+    padding-bottom: ds.$space-5;
+    font-family: ds.$font-body;
+    font-size: ds.$font-size-base;
+    line-height: ds.$line-height-relaxed;
+    color: ds.$color-text-secondary;
+}
