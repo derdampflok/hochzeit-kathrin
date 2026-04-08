@@ -1,11 +1,18 @@
 @use '../styles/design-system' as ds;
 
+.schedule-content {
+    display: flex;
+    gap: ds.$space-8;
+    align-items: stretch;
+}
+
 .schedule-timeline {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
     gap: ds.$space-4;
+    flex: 1;
 }
 
 .schedule-timeline__item {
@@ -46,4 +53,18 @@
     font-size: ds.$font-size-base;
     line-height: ds.$line-height-relaxed;
     color: ds.$color-text-primary;
+}
+
+.schedule-picture {
+    display: none;
+
+    @media (min-width: ds.$bp-tablet) {
+        display: block;
+        flex: 0 0 220px;
+        width: 250px;
+        height: 100%;
+        object-fit: cover;
+        object-position: left center;
+        border-radius: ds.$radius-md;
+    }
 }

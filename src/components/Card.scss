@@ -26,6 +26,11 @@
     position: relative;
     z-index: 1;
   }
+
+  &.no-padding {
+    padding: 0;
+    overflow: hidden;
+  }
 }
 
 // ============================================================================
